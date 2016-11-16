@@ -75,9 +75,9 @@ Without getting too technical, the haversine formula can provide the distance be
 
 1. Save your file once again, and then you can test it. Run your file, and then in the shell you can type the following:
 
-``` python
-haversine(74,0059, 40.7128, 0.1278, 51.5074)
-```
+    ``` python
+    haversine(74,0059, 40.7128, 0.1278, 51.5074)
+    ```
 
 1. You should get an answer of 5570. This is the distance from London to New York. You can check the answer online if you like, although the values will be slightly different as the Earth is not an exact sphere. It's good enough for our purposes though.
 
@@ -90,29 +90,28 @@ In worksheet one you fetched all the weather stations that are currently registe
 
 1. Start by importing the `requests`, `json` and `pprint`modules that you used in worksheet one, but you can now also import your haversine function.
 
-``` python
-from requests import get
-import json
-from pprint import pprint
-from haversine import haversine
-
-```
+    ``` python
+    from requests import get
+    import json
+    from pprint import pprint
+    from haversine import haversine
+    ```
 
 1. In worksheet one, you used two URLs to get the weather stations and the latest weather. You can declare these variables straight away.
 
-``` python
-stations = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallstations'
-weather = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getlatestmeasurements/'
-```
+    ``` python
+    stations = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallstations'
+    weather = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getlatestmeasurements/'
+    ```
 
 1. The second URL isn't complete, as you need to add the weather station id to the end. You're going to do that in code.
 
 1. Now add in variables for your current longitude and latitude, that you found using Google Maps.
 
-``` python
-my_lat = 52.194504
-my_lon = 0.134708
-```
+    ``` python
+    my_lat = 52.194504
+    my_lon = 0.134708
+    ```
 
 1. To finish off this section, you can fetch the list of all stations, just like you did in worksheet one.
 
@@ -126,56 +125,56 @@ For this to work, you're going to need to run the longitude and latitude of all 
 
 1. Start by defining a new function, and within it, setting a variable for the smallest distance. The longest possible distance between two points on the Earth's surface is 20036km, so this would be a good place to start the variable.
 
-``` python
-def find_closest():
-    smallest = 20036
-```
+    ``` python
+    def find_closest():
+        smallest = 20036
+    ```
 
 1. Now you can use a `for` loop to iterate through all the stations. Let's start just by printing the data for each.
 
-``` python
-    for station in all_stations:
-        print(station)
-```
+    ``` python
+        for station in all_stations:
+            print(station)
+    ```
 
 1. To get the list of stations you need to run your function, so type the following into the *shell*.
 
-``` python
-find_closest()
-```
+    ``` python
+    find_closest()
+    ```
 
 1. You should see a large list of dictionaries. With each dictionary looking something like this:
 
-``` python
-{'weather_stn_name': 'ACRG_ROOF', 'weather_stn_lat': 52.197834, 'weather_stn_id': 1648902, 'weather_stn_long': 0.125366}
-```
+    ``` python
+    {'weather_stn_name': 'ACRG_ROOF', 'weather_stn_lat': 52.197834, 'weather_stn_id': 1648902, 'weather_stn_long': 0.125366}
+    ```
 
 1. The data we're interested in is the `'weather_stn_lat'` and `'weather_stn_long'`. These are the values we want to use in the haversine function.
 
 1. Go back to your script and you can now get those values in your function. Remove the `print` and then add the following.
 
-``` python
-        station_lon = station['weather_stn_long']
-        station_lat = station['weather_stn_lat']
-```
+    ``` python
+            station_lon = station['weather_stn_long']
+            station_lat = station['weather_stn_lat']
+    ```
 
 1. Now that you have all the data, it can be run through the haversine function to find the station's distance to you
 
-``` python
-        distance = haversine(my_lon, my_lat, station_lon, station_lat)
-        print(distance)
-```
+    ``` python
+            distance = haversine(my_lon, my_lat, station_lon, station_lat)
+            print(distance)
+    ```
 
 1. Run the code again and type `find_closest()` in the shell again.
 
 1. That's a *long* list of distances. Next you need to find the smallest one and then save that stations id. If the distance is smaller that the `smallest` variable it can be saved, and then next time around the lope it can be checked again.
 
-``` python
-        if distance < smallest:
-            smallest = distance
-            closest_station = station['weather_stn_id']
-    return closest_station
-```
+    ``` python
+            if distance < smallest:
+                smallest = distance
+                closest_station = station['weather_stn_id']
+        return closest_station
+    ```
 
 ## Getting the weather data
 
@@ -183,21 +182,26 @@ Now that you can get the closest weather station to you, getting the data is jus
 
 1. Start by calling your newly created function and saving the weather station id.
 
-``` python
-closest_stn = find_closest()
-```
+    ``` python
+    closest_stn = find_closest()
+    ```
 
 1. Now this can be added to the end of the `weather` variable that stores the URL. It's an integer at the moment through, so it needs to be changed to a string.
 
-``` python
-weather = weather + str(closest_stn)
-```
+    ``` python
+    weather = weather + str(closest_stn)
+    ```
 
 1. Finally, you can use `requests` to get the data and then pretty print it.
 
-``` python
-my_weather = get(weather).json()['items']
-pprint(my_weather)
-```
+    ``` python
+    my_weather = get(weather).json()['items']
+    pprint(my_weather)
+    ```
 
 1. Run your code and you should see the weather data for the station nearest you, printed out in the shell.
+
+## What Next?
+- You could have a look at some weather data from other locations in the world. Use the web to find some longitude and latitudes of other places, and then fetch weather from their nearest stations.
+
+- How about importing the data from several weather stations into some spreadsheet software and drawing some graphs. Or maybe you'd like to try and use Python to draw some graphs for you.
