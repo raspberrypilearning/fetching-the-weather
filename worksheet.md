@@ -1,45 +1,141 @@
 # Fetching the Weather
 
-One thousand weather stations were sent out to schools all over the world, at the beginning of 2016, ready to be assembled and begin collecting weather data.
+One thousand weather stations were sent out to schools all over the world, at the beginning of 2016, ready to be assembled and begin collecting global weather data.
+
+![weather station](images/weather_station.jpg)
 
 Each weather station comes equipped with the sensors, shown in the table below
 
 |Sensor Name|Purpose|
 |-----------|-------|
-|Rain Gauge|Measures the volume of rain falling in milimetres per square|
-|Annenomter|Measures the wind speed in kilometres per hour|
+|Rain Gauge|Measures the volume of rain falling in millimetres per square|
+|Anemometer|Measures the wind speed in kilometres per hour|
 |Wind Vane|Measures the wind direction in degrees|
-|Soil Temperature probe|Measures the soild temperature in degrees celcius|
-|Temperature sensor|Measures the air temperature in degrees celcius|
+|Soil Temperature probe|Measures the soil temperature in degrees Celsius|
+|Temperature sensor|Measures the air temperature in degrees Celsius|
 |Humidity Sensor|Measures the humidity of the air as a percentage|
 |Pressure Sensor|Measures the atmospheric pressure in Pascals
-|Air Quality Sensor|Measures the air quality in arbitary units|
+|Air Quality Sensor|Measures the air quality in arbitrary units|
 
-The weather stations continually monitor the weather and then send their data to an Oracle database, where is stored and can be accessed.
+The weather stations continually monitor the weather and then send their data to an Oracle database, where it is stored and can be accessed.
 
-In this resource you're going to learn how to find a weather station in an area close to you, and then get the latest weather updates from that station.
+In this resource you're going to learn how to find a weather station you're interested in and then get the latest weather updates from that station.
 
-## Longitude and Latitude
+## Finding a Weather Station
 
-You're going to need to find the nearest weather station to your location for this activity. You can do this because the database stores the longitude and latitude of all the weather stations around the world. Let's have a look at what we mean by longitude and latitude.
+You can get a list of all the weather stations that are currently on line, using a simple URL.
 
-1. If you wanted to pin point a place on a 2D object like a piece of paper, you could use x and y coordinates. The x coordinate would place the points horizontal position, and the y coordinate would place the verticle position. You can see an example of this below.
+This is because the database that all the weather stations upload data to has a RESTful API. This is a method by which you can write code that uses simple HTTP requests (just like a browser) to fetch the data.
 
-    ![x and y](images/cartesian_coord.png)
+Copy and paste the following URL into a web-browser
 
-1. Things aren't so simple when you're trying to pinpoint a location on a sphere, like the Earth. The vertical and horizontal positions wrap around the sphere, for a start. Also, travelling 5 units of distance along the equator would be a completely different distance to walking 5 units of distance near one of the poles. For this reason we use longitude and latitude when locating items on the Earth's surface.
+``` html
+https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallstations`
+```
 
-1. You can draw two imaginary circles around the Earth. The first is called the Equator, which you are probably familiar with. The second is called the Prime Meridian, which passes through both the North and South poles and also through Grenwich in London.
+You should see a web-page filled with data. This is a little difficult to read though. Luckily we can grab this data with a little Python code and then present it in a format that's easier to read.
 
-    ![meridians](images/meridians.png)
+1. Click on `Menu` > `Programming` > `Python3 (IDLE)` to open a new Python shell. Then click on `File` > `New File`
 
-1. The centre of these two circles is at the centre of the Earth. Imagine you were standing in the centre of the Earth, you would be able to pinpoint any location on the surface by talking about how many degrees you needed to turn within each of these circles. Longitude tells you how many degrees you need to turn East or West from the Prime meridian. Latitude tells you how many degrees you need to turn North or South from the equator.
+1. The first thing you'll need is a few Python modules. One of them is not in the standard library, but if you haven't already, you can install it from the [Software Requirements page](TO BE ADDED)
 
-    ![longitude and latitude](images/long_lat.gif)
-    
-1. The easiest way to find your longitude and latitude is to use [Google Maps](https://www.google.co.uk/maps/). You can click on any spot on the map, and your longitude and latitude will be revealed at the bottom of the screen.
+``` python
+from requests import get
+import json
+from pprint import pprint
+```
 
-    ![google maps lon and lat](images/gmaps.png)
-    
-1. The first number is your latitude and the second in your longitude. Make a note of the values you get, as you'll need them later.
+1. The `requests` module allows you to fetch web-pages from the World Wide Web. The `json` module allows you to easily read json data (which is a way of organising data into dictionaries). The `pprint` module is short for pretty print, and just makes presenting text a little clearer.
 
+1. The next thing to do is to save that URL you used earlier as a variable.
+
+``` python
+url = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallstations'
+```
+
+1. Now using `get` from the `requests` module you can fetch the data, and translate it into Python dictionaries using the `json` module.
+
+``` python
+stations = get(url).json()['items']
+```
+
+1. Save and run your code. You can type `stations` into the Python shell to have a look at the data.
+
+1. It still looks pretty ugly though. Try typing `pprint(stations)` and see what happens.
+
+1. You should see a huge list of weather stations dictionaries. Each dictionary should look something like this:
+
+``` json
+ {'weather_stn_id': 1648902,
+  'weather_stn_lat': 52.197834,
+  'weather_stn_long': 0.125366,
+  'weather_stn_name': 'ACRG_ROOF'}]
+```
+
+1. What you're seeing is the unique id of the station, it's location in the world using `longitude` and `latitude` (You can learn about this in [worksheet2](worksheet2.md)), and the name of the weather station.
+
+1. For the next part, you're going to need to pick a weather station to fetch the weather from. Scroll up and down the list and pick a `weather_stn_id` that you'd like to have a look at.
+
+## Fetching the latest weather.
+
+Now that you have a weather station to look at, you can learn how to fetch the last weather recording from that station.
+
+This is again handled using the RESTful API of the weather station database. This time the URL you need is made up of two parts. The first tells the database that you are requesting the latest measurements.
+
+``` html
+'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getlatestmeasurements/'
+```
+To the end of this you need to add the id of the weather station you wish to access. For example:
+
+``` html
+'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getlatestmeasurements/1648902
+```
+
+1. Create a new Python file again, by clicking on `File` > `New File`.
+1. Once again you'll need the `requests` and `json` modules, as well as `pprint`
+
+``` python
+from requests import get
+import json
+from pprint import pprint
+```
+
+1. Now you can define a new `url` variable, but using the weather station id you have chosen.
+
+``` python
+url = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getlatestmeasurements/weather_stn_id_goes_here
+```
+
+1. To get the latest measurements, you need one line of code, but we'll add a second line to pretty print it straight away.
+
+``` python
+weather = get(url).json()['items']
+pprint(weather)
+```
+
+1. You should see something like the following appearing in the shell.
+
+``` json
+>>> [{'air_pressure': 1008.81,
+  'air_quality': 74.9,
+  'ambient_temp': 23.58,
+  'created_by': 'ACRG_ROOF',
+  'created_on': '2016-11-16T12:00:01Z',
+  'ground_temp': 18.69,
+  'humidity': 33.41,
+  'id': 1669238,
+  'rainfall': 0,
+  'reading_timestamp': '2016-11-16T12:00:01Z',
+  'updated_by': 'ACRG_ROOF',
+  'updated_on': '2016-11-16T12:05:02.437Z',
+  'weather_stn_id': 1648902,
+  'wind_direction': 315,
+  'wind_gust_speed': 0,
+  'wind_speed': 0}]
+```
+
+1. If you don't see any data, it might be because the weather station is offline. Just try another weather station id.
+
+## What Next?
+
+- In [worksheet two](worksheet2.md) you'll learn all about longitude and latitude, and how to get the weather data for the closest weather station to your current location.
