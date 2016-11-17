@@ -1,43 +1,41 @@
 # Fetching the Weather
 
-One thousand weather stations were sent out to schools all over the world, at the beginning of 2016, ready to be assembled and begin collecting global weather data.
+One thousand Weather Stations were sent out to schools all over the world at the beginning of 2016, ready to be assembled and begin collecting global weather data.
 
-![weather station](images/weather_station.jpg)
+![Weather Station](images/weather_station.jpg)
 
-Each weather station comes equipped with the sensors, shown in the table below
+Each Weather Station comes equipped with the sensors shown in the table below:
 
 |Sensor Name|Purpose|
 |-----------|-------|
-|Rain Gauge|Measures the volume of rain falling in millimetres|
+|Rain gauge|Measures the volume of rain falling in millimetres|
 |Anemometer|Measures the wind speed in kilometres per hour|
-|Wind Vane|Measures the wind direction in degrees|
-|Soil Temperature probe|Measures the soil temperature in degrees Celsius|
+|Weathervane|Measures the wind direction in degrees|
+|Soil temperature probe|Measures the soil temperature in degrees Celsius|
 |Temperature sensor|Measures the air temperature in degrees Celsius|
-|Humidity Sensor|Measures the relative humidity of the air as a percentage|
-|Pressure Sensor|Measures the atmospheric pressure in Pascals
-|Air Quality Sensor|Measures the air quality as a relative percentage|
+|Humidity sensor|Measures the relative humidity of the air as a percentage|
+|Pressure sensor|Measures the atmospheric pressure in Pascals|
+|Air quality sensor|Measures the air quality as a relative percentage|
 
-The weather stations continually monitor the weather and then send their data to an Oracle database, where it is stored and can be accessed.
+The Weather Stations continually monitor the weather and then send their data to an Oracle database, where it is stored and can be accessed.
 
-In this resource you're going to learn how to find a weather station you're interested in and then get the latest weather updates from that station.
+In this resource you're going to learn how to find a Weather Station you're interested in, and then get the latest weather updates from that station.
 
 ## Finding a Weather Station
 
-You can get a list of all the weather stations that are currently on line, using a simple URL.
+You can get a list of all the Weather Stations that are currently online, using a simple URL. This is because the database that all the Weather Stations upload data to has a RESTful API. This is a method by which you can write code that uses simple HTTP requests (just like a browser) to fetch the data.
 
-This is because the database that all the weather stations upload data to has a RESTful API. This is a method by which you can write code that uses simple HTTP requests (just like a browser) to fetch the data.
-
-Copy and paste the following URL into a web-browser
+Copy and paste the following URL into a web browser:
 
     ``` html
     https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallstations
     ```
 
-You should see a web-page filled with data. This is a little difficult to read though. Luckily we can grab this data with a little Python code and then present it in a format that's easier to read.
+You should see a web page filled with data. This is a little difficult to read, though. Luckily, we can grab this data with a little Python code and then present it in a format that's easier to read.
 
-1. Click on `Menu` > `Programming` > `Python3 (IDLE)` to open a new Python shell. Then click on `File` > `New File`
+1. Click on `Menu` > `Programming` > `Python3 (IDLE)` to open a new Python shell, then click on `File` > `New File`.
 
-1. The first thing you'll need is a few Python modules. One of them is not in the standard library, but if you haven't already, you can install it from the [Software Requirements page](https://raspberrypi.org/learning/fetching-the-weather/requirements/software/
+1. The first thing you'll need is a few Python modules. One of them is not in the standard library, but you can install it from the [Software Requirements page](https://raspberrypi.org/learning/fetching-the-weather/requirements/software/).
 
     ``` python
     from requests import get
@@ -45,15 +43,15 @@ You should see a web-page filled with data. This is a little difficult to read t
     from pprint import pprint
     ```
 
-1. The `requests` module allows you to fetch web-pages from the World Wide Web. The `json` module allows you to easily read json data (which is a way of organising data into dictionaries). The `pprint` module is short for pretty print, and just makes presenting text a little clearer.
+1. The `requests` module allows you to fetch web pages from the World Wide Web. The `json` module allows you to easily read JSON data (which is a way of organising data into dictionaries). The `pprint` module is short for pretty-print, and just makes presenting text a little clearer.
 
-1. The next thing to do is to save that URL you used earlier as a variable.
+1. The next thing to do is to save that URL you used earlier as a variable:
 
     ``` python
     url = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallstations'
     ```
 
-1. Now using `get` from the `requests` module you can fetch the data, and translate it into Python dictionaries using the `json` module.
+1. Using `get` from the `requests` module you can now fetch the data, and translate it into Python dictionaries using the `json` module:
 
     ``` python
     stations = get(url).json()['items']
@@ -61,9 +59,7 @@ You should see a web-page filled with data. This is a little difficult to read t
 
 1. Save and run your code. You can type `stations` into the Python shell to have a look at the data.
 
-1. It still looks pretty ugly though. Try typing `pprint(stations)` and see what happens.
-
-1. You should see a huge list of weather stations dictionaries. Each dictionary should look something like this:
+1. It still looks pretty ugly. Try typing `pprint(stations)` and see what happens. You should see a huge list of Weather Stations dictionaries. Each dictionary should look something like this:
 
     ``` json
      {'weather_stn_id': 1648902,
@@ -72,27 +68,26 @@ You should see a web-page filled with data. This is a little difficult to read t
       'weather_stn_name': 'ACRG_ROOF'}]
     ```
 
-1. What you're seeing is the unique id of the station, it's location in the world using `longitude` and `latitude` (You can learn about this in [worksheet2](worksheet2.md)), and the name of the weather station.
+1. What you're seeing is the unique ID of the station, its location in the world using `longitude` and `latitude` (You can learn about this in [worksheet2](worksheet2.md)), and the name of the Weather Station.
 
-1. For the next part, you're going to need to pick a weather station to fetch the weather from. Scroll up and down the list and pick a `weather_stn_id` that you'd like to have a look at.
+1. For the next part, you're going to need to pick a Weather Station to fetch the weather from. Scroll up and down the list and pick a `weather_stn_id` that you'd like to have a look at.
 
-## Fetching the latest weather.
+## Fetching the latest weather
 
-Now that you have a weather station to look at, you can learn how to fetch the last weather recording from that station.
-
-This is again handled using the RESTful API of the weather station database. This time the URL you need is made up of two parts. The first tells the database that you are requesting the latest measurements.
+Now that you have a Weather Station to look at, you can learn how to fetch the last weather recording from that station.
+This is again handled using the RESTful API of the Weather Station database. This time, the URL you need is made up of two parts. The first tells the database that you're requesting the latest measurements:
 
     ``` html
 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getlatestmeasurements/'
     ```
-To the end of this you need to add the id of the weather station you wish to access. For example:
+You need to add the ID of the Weather Station you wish to access to the end of this. For example:
 
     ``` html
     'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getlatestmeasurements/1648902
     ```
 
 1. Create a new Python file again, by clicking on `File` > `New File`.
-1. Once again you'll need the `requests` and `json` modules, as well as `pprint`
+1. Once again, you'll need the `requests` and `json` modules, as well as `pprint`:
 
     ``` python
     from requests import get
@@ -100,20 +95,20 @@ To the end of this you need to add the id of the weather station you wish to acc
     from pprint import pprint
     ```
 
-1. Now you can define a new `url` variable, but using the weather station id you have chosen.
+1. Now you can define a new `url` variable, but using the Weather Station ID you've chosen:
 
     ``` python
     url = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getlatestmeasurements/weather_stn_id_goes_here
     ```
 
-1. To get the latest measurements, you need one line of code, but we'll add a second line to pretty print it straight away.
+1. To get the latest measurements you need one line of code, but we'll add a second line to pretty-print it straight away:
 
 ``` python
 weather = get(url).json()['items']
 pprint(weather)
 ```
 
-1. You should see something like the following appearing in the shell.
+1. You should see something like the following appearing in the shell:
 
     ``` json
     >>> [{'air_pressure': 1008.81,
@@ -134,8 +129,8 @@ pprint(weather)
       'wind_speed': 0}]
     ```
 
-1. If you don't see any data, it might be because the weather station is offline. Just try another weather station id.
+1. If you don't see any data, it might be because the Weather Station is offline. Just try another Weather Station Id.
 
-## What Next?
+## What next?
 
-- In [worksheet two](worksheet2.md) you'll learn all about longitude and latitude, and how to get the weather data for the closest weather station to your current location.
+- In [worksheet two](worksheet2.md) you'll learn all about longitude and latitude, and how to get the weather data for the closest Weather Station to your current location.
