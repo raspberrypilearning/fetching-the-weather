@@ -1,3 +1,1 @@
-In this resource you will make a Python script to fetch data from a Raspberry Pi Weather Station.
-
-You can then learn how to find the nearest weather station to you, and fetch the data from that weather station.
+This resource teaches you how to access the Raspberry Pi Weather Station database using a RESTful API, how to use the haversine formula to calculate which weather station is closest to you, and how to fetch the latest weather data from that station.
