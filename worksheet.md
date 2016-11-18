@@ -27,9 +27,9 @@ You can get a list of all the Weather Stations that are currently online, using 
 
 Copy and paste the following URL into a web browser:
 
-    ``` html
-    https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallstations
-    ```
+``` html
+https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallstations
+```
 
 You should see a web page filled with data. This is a little difficult to read, though. Luckily, we can grab this data with a little Python code and then present it in a format that's easier to read.
 
