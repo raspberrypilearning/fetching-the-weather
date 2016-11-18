@@ -35,7 +35,7 @@ You should see a web page filled with data. This is a little difficult to read, 
 
 1. Click on `Menu` > `Programming` > `Python3 (IDLE)` to open a new Python shell, then click on `File` > `New File`.
 
-1. The first thing you'll need is a few Python modules. One of them is not in the standard library, but you can install it from the [Software Requirements page](https://raspberrypi.org/learning/fetching-the-weather/requirements/software/).
+1. The first thing you'll need is a few Python modules. One of them is not in the standard library, but you can install it from the [Requirements page](https://raspberrypi.org/learning/fetching-the-weather/requirement/).
 
     ``` python
     from requests import get
@@ -77,14 +77,14 @@ You should see a web page filled with data. This is a little difficult to read, 
 Now that you have a Weather Station to look at, you can learn how to fetch the last weather recording from that station.
 This is again handled using the RESTful API of the Weather Station database. This time, the URL you need is made up of two parts. The first tells the database that you're requesting the latest measurements:
 
-    ``` html
+``` html
 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getlatestmeasurements/'
-    ```
+```
 You need to add the ID of the Weather Station you wish to access to the end of this. For example:
 
-    ``` html
-    'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getlatestmeasurements/1648902
-    ```
+``` html
+'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getlatestmeasurements/1648902
+```
 
 1. Create a new Python file again, by clicking on `File` > `New File`.
 1. Once again, you'll need the `requests` and `json` modules, as well as `pprint`:
@@ -103,10 +103,10 @@ You need to add the ID of the Weather Station you wish to access to the end of t
 
 1. To get the latest measurements you need one line of code, but we'll add a second line to pretty-print it straight away:
 
-``` python
-weather = get(url).json()['items']
-pprint(weather)
-```
+    ``` python
+    weather = get(url).json()['items']
+    pprint(weather)
+    ```
 
 1. You should see something like the following appearing in the shell:
 
