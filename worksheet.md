@@ -35,7 +35,7 @@ You should see a web page filled with data. This is a little difficult to read, 
 
 1. Click on `Menu` > `Programming` > `Python3 (IDLE)` to open a new Python shell, then click on `File` > `New File`.
 
-1. The first thing you'll need is a few Python modules. One of them is not in the standard library, but you can install it from the [Requirements page](https://raspberrypi.org/learning/fetching-the-weather/requirement/).
+1. The first thing you'll need is a few Python modules. One of them is not in the standard library, but you can install it from the [Requirements page](https://www.raspberrypi.org/learning/fetching-the-weather/requirements/).
 
     ``` python
     from requests import get
