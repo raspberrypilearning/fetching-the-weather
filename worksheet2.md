@@ -144,7 +144,7 @@ For this to work, you're going to need to run the longitude and latitude of all 
     find_closest()
     ```
 
-You should see a large list of dictionaries, with each dictionary looking something like this:
+	You should see a large list of dictionaries, with each dictionary looking something like this:
 
     ``` python
     {'weather_stn_name': 'ACRG_ROOF', 'weather_stn_lat': 52.197834, 'weather_stn_id': 1648902, 'weather_stn_long': 0.125366}
@@ -152,7 +152,7 @@ You should see a large list of dictionaries, with each dictionary looking someth
 
 The data we're interested in is the `'weather_stn_lat'` and `'weather_stn_long'`. These are the values we want to use in the haversine function.
 
-1. Go back to your script; you can now get those values in your function. Remove the `print` and then add the following:
+1. Go back to your script; you can now get those values in your function. Remove the `print(station)` line and then add the following:
 
     ``` python
             station_lon = station['weather_stn_long']
@@ -176,6 +176,21 @@ The data we're interested in is the `'weather_stn_lat'` and `'weather_stn_long'`
                 closest_station = station['weather_stn_id']
         return closest_station
     ```
+
+1. Your `find_closest` function should now look like this:
+
+	```python
+	def find_closest():
+		smallest = 20036
+		for station in all_stations:
+			station_lon = station['weather_stn_long']
+			station_lat = station['weather_stn_lat']
+			distance = haversine(my_lon, my_lat, station_lon, station_lat)
+			if distance < smallest:
+				smallest = distance
+				closest_station = station['weather_stn_id']
+		return closest_station
+	```
 
 ## Getting the weather data
 

@@ -83,7 +83,7 @@ This is again handled using the RESTful API of the Weather Station database. Thi
 You need to add the ID of the Weather Station you wish to access to the end of this. For example:
 
 ``` html
-'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getlatestmeasurements/1648902
+'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getlatestmeasurements/1648902'
 ```
 
 1. Create a new Python file again, by clicking on `File` > `New File`.
@@ -98,7 +98,7 @@ You need to add the ID of the Weather Station you wish to access to the end of t
 1. Now you can define a new `url` variable, but using the Weather Station ID you've chosen:
 
     ``` python
-    url = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getlatestmeasurements/weather_stn_id_goes_here
+    url = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getlatestmeasurements/weather_stn_id_goes_here'
     ```
 
 1. To get the latest measurements you need one line of code, but we'll add a second line to pretty-print it straight away:
