@@ -76,7 +76,7 @@ Without getting too technical, the haversine formula can provide the distance be
 1. Save your file once again, and then you can test it. Run your file, and then in the shell you can type the following:
 
     ``` python
-    haversine(74,0059, 40.7128, 0.1278, 51.5074)
+    haversine(74.0059, 40.7128, 0.1278, 51.5074)
     ```
 
 1. You should get an answer of 5570. This is the distance from London to New York. You can check the answer online if you like, although the values will be slightly different as the Earth is not an exact sphere. It's good enough for our purposes, though.
