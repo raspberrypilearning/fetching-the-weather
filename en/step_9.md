@@ -1,59 +1,37 @@
-## Finding the distance between two points on the Earth
+## Getting ready
 
-The next part is a little technical. You need to be able to find the distance between two points on the Earth, given their longitudes and latitudes. This will allow you to find the closest Weather Station to you.
+In the first worksheet, you fetched all the Weather Stations that are currently registered. The data came in as a huge list of dictionaries. By iterating through this list, you can pick out the longitude and latitude of the Weather Stations, and then run it through your haversine function to find the closest one.
 
-If you're not particularly interested in how this works, then rather than write the code, you can download the file you need from [here](https://raw.githubusercontent.com/raspberrypilearning/fetching-the-weather/master/code/haversine.py). Just make sure it's saved as `haversine.py` and stored in the same directory as the rest of your code.
+- Create a new Python file (`File` > `New File`) and make sure you save it in the same directory as your `haversine.py` file.
 
-As discussed earlier, we use longitude and latitude to work out the exact position of places on the Earth. Finding distances between these points is quite tricky, as the distance is over the surface of a sphere, and therefore not in a straight line. To do this calculation, you need a clever bit of maths called the [haversine formula](https://en.wikipedia.org/wiki/Haversine_formula).
-
-Without getting too technical, the haversine formula can provide the distance between two points on a sphere using longitudes and latitudes.
-
-- Open up a Python shell by clicking on `Menu` > `Programming` > `Python3 (IDLE)`.
-- Now click on `File` > `New File` to create a new Python script. Click on `File` > `Save As` and call your file `haversine.py`.
-- To begin with, you're going to need a few functions from the `maths` library. Start off your file by importing the following:
+- Start by importing the `requests`, `json`, and `pprint` modules that you used in Worksheet One, but you can now also import your haversine function:
 
     ``` python
-    from math import radians, cos, sin, asin, sqrt
+    from requests import get
+    import json
+    from pprint import pprint
+    from haversine import haversine
     ```
 
-- Now you can define a new function, which we'll call `haversine`. It's going to take 4 arguments, which will be the longitude and latitude of the two points whose distance we need to find.
+- In Worksheet One, you used two URLs to get the Weather Stations and the latest weather. You can declare these variables straight away:
 
     ``` python
-    def haversine(lon1, lat1, lon2, lat2):
+    stations = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallstations'
+    weather = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getlatestmeasurements/'
     ```
-- Most mathematical formulae require us to work in [radians](http://www.bbc.co.uk/bitesize/higher/maths/trigonometry/radian_and_equations/revision/1/) rather than degrees when dealing with angles, so the first thing to do is to convert each of the latitudes and longitudes passed into the function as arguments into radians.
+
+- The second URL isn't complete, as you need to add the weather station ID to the end. You're going to do that in code.
+
+- Now add in variables for your current longitude and latitude, that you found using Google Maps:
 
     ``` python
-    def haversine(lon1, lat1, lon2, lat2):
-        #convert degrees to radians
-        lon1 = radians(lon1)
-        lat1 = radians(lat1)
-        lon2 = radians(lon2)
-        lat2 = radians(lat2)
-    ```
-    
-- Now we want to find the difference between the two longitudes and latitudes, so add this into your function:
-
-    ``` python
-        dlon = lon2 - lon1 
-        dlat = lat2 - lat1 
+    my_lat = 52.194504
+    my_lon = 0.134708
     ```
 
-- Now comes the tricky bit. If you want to know more about the haversine formula then you can have a read of the Wikipedia article linked above. Otherwise, you can just take it at face value that the following lines of code will calculate the distance between the two points:
+- To finish off this section, you can fetch the list of all stations, just like you did in Worksheet One:
 
-    ``` python
-        a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
-        distance = 2 * asin(sqrt(a)) * 6371 #6371 is the radius of the Earth
-        return distance
-    ```
-
-- Save your file once again, and then you can test it. Run your file, and then in the shell you can type the following:
-
-    ``` python
-    haversine(74.0059, 40.7128, 0.1278, 51.5074)
-    ```
-
-- You should get an answer of 5570. This is the distance from London to New York. You can check the answer online if you like, although the values will be slightly different as the Earth is not an exact sphere. It's good enough for our purposes, though.
-
-Try a few more longitudes and latitudes from Google Maps.
+``` python
+all_stations = get(stations).json()['items']
+```
 

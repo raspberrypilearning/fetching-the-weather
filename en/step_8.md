@@ -1,24 +1,59 @@
-## Longitude and latitude
+## Finding the distance between two points on the Earth
 
-It would be nice if you could pick a Weather Station that's close to you to fetch the data from. You can do this, because the database stores the longitude and latitude of all the Weather Stations around the world. Let's have a look at what we mean by longitude and latitude.
+The next part is a little technical. You need to be able to find the distance between two points on the Earth, given their longitudes and latitudes. This will allow you to find the closest Weather Station to you.
 
-- If you wanted to pinpoint a place on a 2D object like a piece of paper, you could use x and y coordinates. The x coordinate would place the point's horizontal position, and the y coordinate would place the vertical position. You can see an example of this below.
+If you're not particularly interested in how this works, then rather than write the code, you can download the file you need from [here](https://raw.githubusercontent.com/raspberrypilearning/fetching-the-weather/master/code/haversine.py). Just make sure it's saved as `haversine.py` and stored in the same directory as the rest of your code.
 
-    ![x and y](https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Cartesian-coordinate-system.svg/1000px-Cartesian-coordinate-system.svg.png)
+As discussed earlier, we use longitude and latitude to work out the exact position of places on the Earth. Finding distances between these points is quite tricky, as the distance is over the surface of a sphere, and therefore not in a straight line. To do this calculation, you need a clever bit of maths called the [haversine formula](https://en.wikipedia.org/wiki/Haversine_formula).
 
-- Things aren't so simple when you're trying to pinpoint a location on a sphere, like the Earth. The vertical and horizontal positions wrap around the sphere, for a start. Also, travelling 5 units of distance along the equator would be a completely different distance to walking 5 units of distance near one of the poles. For this reason we use longitude and latitude when locating items on the Earth's surface.
+Without getting too technical, the haversine formula can provide the distance between two points on a sphere using longitudes and latitudes.
 
-- You can draw two imaginary circles around the Earth. The first is called the equator, which you're probably familiar with. The second is called the prime meridian, which passes through both the North and South Poles and also through Greenwich in London.
+- Open up a Python shell by clicking on `Menu` > `Programming` > `Python3 (IDLE)`.
+- Now click on `File` > `New File` to create a new Python script. Click on `File` > `Save As` and call your file `haversine.py`.
+- To begin with, you're going to need a few functions from the `maths` library. Start off your file by importing the following:
 
-    ![meridians](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Primemeridian.jpg/1024px-Primemeridian.jpg)
+    ``` python
+    from math import radians, cos, sin, asin, sqrt
+    ```
 
-- The centre of these two circles is at the centre of the Earth. Imagine you were standing in the centre of the Earth; you would be able to pinpoint any location on the surface by talking about how many degrees you needed to turn within each of these circles. Longitude tells you how many degrees you need to turn east or west from the prime meridian. Latitude tells you how many degrees you need to turn north or south from the equator.
+- Now you can define a new function, which we'll call `haversine`. It's going to take 4 arguments, which will be the longitude and latitude of the two points whose distance we need to find.
 
-    ![longitude and latitude](https://upload.wikimedia.org/wikipedia/commons/b/b2/Longitude_and_latitude_definition.gif)
+    ``` python
+    def haversine(lon1, lat1, lon2, lat2):
+    ```
+- Most mathematical formulae require us to work in [radians](http://www.bbc.co.uk/bitesize/higher/maths/trigonometry/radian_and_equations/revision/1/) rather than degrees when dealing with angles, so the first thing to do is to convert each of the latitudes and longitudes passed into the function as arguments into radians.
+
+    ``` python
+    def haversine(lon1, lat1, lon2, lat2):
+        #convert degrees to radians
+        lon1 = radians(lon1)
+        lat1 = radians(lat1)
+        lon2 = radians(lon2)
+        lat2 = radians(lat2)
+    ```
     
-- The easiest way to find your longitude and latitude is to use [Google Maps](https://www.google.co.uk/maps/). You can click on any spot on the map, and your longitude and latitude will be revealed at the bottom of the screen.
+- Now we want to find the difference between the two longitudes and latitudes, so add this into your function:
 
-    ![google maps lon and lat](images/gmaps.png)
-    
-- The first number is your latitude and the second is your longitude. Make a note of the values you get, as you'll need them later.
+    ``` python
+        dlon = lon2 - lon1 
+        dlat = lat2 - lat1 
+    ```
+
+- Now comes the tricky bit. If you want to know more about the haversine formula then you can have a read of the Wikipedia article linked above. Otherwise, you can just take it at face value that the following lines of code will calculate the distance between the two points:
+
+    ``` python
+        a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
+        distance = 2 * asin(sqrt(a)) * 6371 #6371 is the radius of the Earth
+        return distance
+    ```
+
+- Save your file once again, and then you can test it. Run your file, and then in the shell you can type the following:
+
+    ``` python
+    haversine(74.0059, 40.7128, 0.1278, 51.5074)
+    ```
+
+- You should get an answer of 5570. This is the distance from London to New York. You can check the answer online if you like, although the values will be slightly different as the Earth is not an exact sphere. It's good enough for our purposes, though.
+
+Try a few more longitudes and latitudes from Google Maps.
 
