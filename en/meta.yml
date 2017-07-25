@@ -1,0 +1,29 @@
+---
+title: Fetching the weather
+hero_image: images/banner.png
+description: Access the Weather Station database and fetch the weather
+original_url: https://raspberrypi.org/learning/fetching-the-weather
+theme: red
+duration: 2
+listed: false
+ingredient: false
+copyedit: true
+curriculum: creator, design-0, programming-0, phys-comp-0, manufacture-0, community-0
+interests: ''
+technologies: rpi, physical computing, python
+site_areas: ''
+steps:
+- title: Introduction
+- title: What you will need
+- title: Fetching the Weather
+- title: Finding a Weather Station
+- title: Fetching the latest weather
+- title: What next?
+- title: Finding a Station near you
+- title: Longitude and latitude
+- title: Finding the distance between two points on the Earth
+- title: Getting ready
+- title: Finding the closest station
+- title: Getting the weather data
+- title: What next?
+
