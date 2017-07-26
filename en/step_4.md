@@ -45,7 +45,7 @@ You should see a web page filled with data. This is a little difficult to read, 
       'weather_stn_name': 'ACRG_ROOF'}]
     ```
 
-- What you're seeing is the unique ID of the station, its location in the world using `longitude` and `latitude` (You can learn about this in [worksheet2](worksheet2.md)), and the name of the Weather Station.
+- What you're seeing is the unique ID of the station, its location in the world using `longitude` and `latitude` (You can learn about this in [later on](finding-a-station-near-you)), and the name of the Weather Station.
 
 - For the next part, you're going to need to pick a Weather Station to fetch the weather from. Scroll up and down the list and pick a `weather_stn_id` that you'd like to have a look at.
 
