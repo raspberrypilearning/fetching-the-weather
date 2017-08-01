@@ -18,7 +18,6 @@ steps:
 - title: Fetching the Weather
 - title: Finding a Weather Station
 - title: Fetching the latest weather
-- title: Finding a Station near you
 - title: Longitude and latitude
 - title: Finding the distance between two points on the Earth
 - title: Getting ready

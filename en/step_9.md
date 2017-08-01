@@ -1,37 +1,72 @@
-## Getting ready
+## Finding the closest station
 
-In the first worksheet, you fetched all the Weather Stations that are currently registered. The data came in as a huge list of dictionaries. By iterating through this list, you can pick out the longitude and latitude of the Weather Stations, and then run it through your haversine function to find the closest one.
+For this to work, you're going to need to run the longitude and latitude of all the stations through the haversine function. The trick will be finding the smallest distance to your current longitude and latitude, and saving this as a variable.
 
-- Create a new Python file (`File` > `New File`) and make sure you save it in the same directory as your `haversine.py` file.
-
-- Start by importing the `requests`, `json`, and `pprint` modules that you used in Worksheet One, but you can now also import your haversine function:
+- Start by defining a new function, and setting a variable within it for the smallest distance. The longest possible distance between two points on the Earth's surface is 20036km, so this would be a good place to start the variable:
 
     ``` python
-    from requests import get
-    import json
-    from pprint import pprint
-    from haversine import haversine
+    def find_closest():
+        smallest = 20036
     ```
 
-- In Worksheet One, you used two URLs to get the Weather Stations and the latest weather. You can declare these variables straight away:
+- Now you can use a `for` loop to iterate through all the stations. Let's start by printing the data for each:
 
     ``` python
-    stations = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallstations'
-    weather = 'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getlatestmeasurements/'
+        for station in all_stations:
+            print(station)
     ```
 
-- The second URL isn't complete, as you need to add the weather station ID to the end. You're going to do that in code.
-
-- Now add in variables for your current longitude and latitude, that you found using Google Maps:
+- To get the list of stations you need to run your function, so type the following into the shell:
 
     ``` python
-    my_lat = 52.194504
-    my_lon = 0.134708
+    find_closest()
     ```
 
-- To finish off this section, you can fetch the list of all stations, just like you did in Worksheet One:
+	You should see a large list of dictionaries, with each dictionary looking something like this:
 
-``` python
-all_stations = get(stations).json()['items']
-```
+    ``` python
+    {'weather_stn_name': 'ACRG_ROOF', 'weather_stn_lat': 52.197834, 'weather_stn_id': 1648902, 'weather_stn_long': 0.125366}
+    ```
+
+The data we're interested in is the `'weather_stn_lat'` and `'weather_stn_long'`. These are the values we want to use in the haversine function.
+
+- Go back to your script; you can now get those values in your function. Remove the `print(station)` line and then add the following:
+
+    ``` python
+            station_lon = station['weather_stn_long']
+            station_lat = station['weather_stn_lat']
+    ```
+
+- Now that you have all the data, it can be run through the haversine function to find the station's distance to you:
+
+    ``` python
+            distance = haversine(my_lon, my_lat, station_lon, station_lat)
+            print(distance)
+    ```
+
+- Run the code again and type `find_closest()` in the shell again.
+
+- That's a *long* list of distances. Next, you need to find the smallest one and then save that station's ID. If the distance is smaller than the `smallest` variable it can be saved, and then next time around the loop it can be checked again.
+
+    ``` python
+            if distance < smallest:
+                smallest = distance
+                closest_station = station['weather_stn_id']
+        return closest_station
+    ```
+
+- Your `find_closest` function should now look like this:
+
+	```python
+	def find_closest():
+		smallest = 20036
+		for station in all_stations:
+			station_lon = station['weather_stn_long']
+			station_lat = station['weather_stn_lat']
+			distance = haversine(my_lon, my_lat, station_lon, station_lat)
+			if distance < smallest:
+				smallest = distance
+				closest_station = station['weather_stn_id']
+		return closest_station
+	```
 
