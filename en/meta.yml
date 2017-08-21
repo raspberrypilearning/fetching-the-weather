@@ -3,7 +3,7 @@ title: Fetching the weather
 hero_image: images/banner.png
 description: Access the Weather Station database and fetch the weather
 original_url: https://raspberrypi.org/learning/fetching-the-weather
-theme: red
+theme: blue
 duration: 2
 listed: true
 ingredient: false
