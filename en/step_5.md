@@ -16,7 +16,7 @@ https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getlatestmeasurement
 
 - Create a new Python file again, by clicking on `File` > `New File`.
 
-- Save your program as `get_data.py`.
+- Save your program as `fetch_weather.py`.
 
 - Once again, you'll need the `requests` and `json` modules, as well as `pprint`:
 

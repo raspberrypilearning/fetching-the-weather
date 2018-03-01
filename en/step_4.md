@@ -16,7 +16,7 @@ You should see a web page filled with data. This is a little difficult to read, 
 
 - Open a new file by clicking `File` > `New File`.
 
-- Save your program as `weather_stations.py`.
+- Save your program as `fetch_stations.py`.
 
 - The first thing you'll need is a few Python modules. `requests`  is not in the standard library, but you can install it using the instructions from the [What you will need section](What you will need).
 
