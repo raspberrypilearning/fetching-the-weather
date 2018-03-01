@@ -23,4 +23,4 @@ Now that you can get the closest Weather Station to you, you can get the data fr
 
 - Run your code and you should see the weather data for the station nearest you, printed out in the shell.
 
-![local weather in the shell](idle_fetching_local_weather.png)
+![local weather in the shell](images/idle_fetching_local_weather.png)

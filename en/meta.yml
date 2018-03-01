@@ -20,7 +20,7 @@ steps:
 - title: Fetching the latest weather
 - title: Longitude and latitude
 - title: Finding the distance between two points on the Earth
-- title: Getting ready
+- title: Fetch your local weather
 - title: Finding the closest station
 - title: Getting the weather data
 - title: What next?

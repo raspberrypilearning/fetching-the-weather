@@ -22,7 +22,7 @@ For this to work, you're going to need to run the longitude and latitude of all 
     find_closest()
     ```
 
-![idle list stations](idle_find_closest.png)
+![idle list stations](images/idle_find_closest.png)
 
 You should see a large list of dictionaries, with each dictionary looking something like this:
 
@@ -61,7 +61,7 @@ That's a *long* list of distances.
 
 Your `find_closest` function should now look like this:
 
-	```python
+	``` python
 	def find_closest():
 		smallest = 20036
 		for station in all_stations:

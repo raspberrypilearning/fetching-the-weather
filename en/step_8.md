@@ -1,7 +1,7 @@
-## Getting ready
+## Fetch your local weather
 
 At the start of this project, you fetched all the Weather Stations that are currently registered. The data came in as a huge list of dictionaries. By iterating through this list, you can pick out the longitude and latitude of the Weather Stations, and then run it through your haversine function to find the closest one.
-
+s
 - Create a new Python file (`File` > `New File`) 
 
 - Save the file as `fetch_local_weather.py` and make sure you save it in the same directory as your `haversine.py` file.
