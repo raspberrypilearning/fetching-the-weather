@@ -59,7 +59,7 @@ The number `6371` in the code above is the radius of the Earth
     haversine(74.0059, 40.7128, 0.1278, 51.5074)
     ```
 
-![run the haversine function](images/run_haversine.png)
+![run the haversine function](images/run_haversine.PNG)
 
 You should get an answer of 5570. This is the distance from London to New York. You can check the answer online if you like, although the values will be slightly different as the Earth is not an exact sphere. It's good enough for our purposes, though.
 

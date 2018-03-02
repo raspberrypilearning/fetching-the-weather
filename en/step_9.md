@@ -61,17 +61,17 @@ That's a *long* list of distances.
 
 Your `find_closest` function should now look like this:
 
-	``` python
-	def find_closest():
-		smallest = 20036
-		for station in all_stations:
-			station_lon = station['weather_stn_long']
-			station_lat = station['weather_stn_lat']
-			distance = haversine(my_lon, my_lat, station_lon, station_lat)
-			if distance < smallest:
-				smallest = distance
-				closest_station = station['weather_stn_id']
-		return closest_station
-	```
+``` python
+def find_closest():
+    smallest = 20036
+    for station in all_stations:
+        station_lon = station['weather_stn_long']
+        station_lat = station['weather_stn_lat']
+        distance = haversine(my_lon, my_lat, station_lon, station_lat)
+        if distance < smallest:
+            smallest = distance
+            closest_station = station['weather_stn_id']
+    return closest_station
+```
 
 Be really careful with the indents otherwise the function wont work properly.
