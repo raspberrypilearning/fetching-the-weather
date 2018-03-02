@@ -1,6 +1,6 @@
 # Fetching the Weather
 
-![](cover.png)
+![](en/images/banner.png)
 
 This resource teaches how to access the Raspberry Pi Weather Station database using a RESTful API, how to use the haversine formula to calculate which weather station is closest to you, and how to fetch the latest weather data from that station.
 

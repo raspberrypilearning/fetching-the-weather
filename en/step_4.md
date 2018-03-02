@@ -8,11 +8,17 @@ Copy and paste the following URL into a web browser:
 https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getallstations
 ```
 
+![data from weather stations in webpage](images/website_data.PNG)
+
 You should see a web page filled with data. This is a little difficult to read, though. Luckily, we can grab this data with a little Python code and then present it in a format that's easier to read.
 
-- Click on `Menu` > `Programming` > `Python3 (IDLE)` to open a new Python shell, then click on `File` > `New File`.
+- Open `IDLE Python 3`  to open the Python shell
 
-- The first thing you'll need is a few Python modules. One of them is not in the standard library, but you can install it using the instructions from the [What you will need section](What you will need).
+- Open a new file by clicking `File` > `New File`.
+
+- Save your program as `fetch_stations.py`.
+
+- The first thing you'll need is a few Python modules. `requests`  is not in the standard library, but you can install it using the instructions from the [What you will need section](What you will need).
 
     ``` python
     from requests import get
@@ -20,7 +26,7 @@ You should see a web page filled with data. This is a little difficult to read, 
     from pprint import pprint
     ```
 
-- The `requests` module allows you to fetch web pages from the World Wide Web. The `json` module allows you to easily read JSON data (which is a way of organising data into dictionaries). The `pprint` module is short for pretty-print, and just makes presenting text a little clearer.
+The `requests` module allows you to fetch web pages from the World Wide Web. The `json` module allows you to easily read JSON data (which is a way of organising data into dictionaries). The `pprint` module is short for pretty-print, and just makes presenting text a little clearer.
 
 - The next thing to do is to save that URL you used earlier as a variable:
 
@@ -34,7 +40,11 @@ You should see a web page filled with data. This is a little difficult to read, 
     stations = get(url).json()['items']
     ```
 
-- Save and run your code. You can type `stations` into the Python shell to have a look at the data.
+- Save and run your code. 
+
+- Type `stations` into the Python shell to have a look at the data.
+
+![look at the data in idle](images/idle_look_at_the_data.PNG)
 
 - It still looks pretty ugly. Try typing `pprint(stations)` and see what happens. You should see a huge list of Weather Stations dictionaries. Each dictionary should look something like this:
 
@@ -45,7 +55,14 @@ You should see a web page filled with data. This is a little difficult to read, 
       'weather_stn_name': 'ACRG_ROOF'}]
     ```
 
-- What you're seeing is the unique ID of the station, its location in the world using `longitude` and `latitude` (You can learn about this in [later on](longitude-and-latitude)), and the name of the Weather Station.
+What you're seeing is:
+ - `weather_stn_id` - the unique ID of the station (`weather_stn_id`) 
+ - its location in the world (you will learn about this later in the project)
+   - `weather_stn_lat` - the latitude
+   - `weather_stn_long` - the longitude 
+ - `weather_stn_name` - the name of the Weather Station.
 
-- For the next part, you're going to need to pick a Weather Station to fetch the weather from. Scroll up and down the list and pick a `weather_stn_id` that you'd like to have a look at.
+For the next part, you're going to need to pick a Weather Station to fetch the weather from. 
+
+- Scroll up and down the list and pick a `weather_stn_id` that you'd like to have a look at.
 

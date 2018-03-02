@@ -4,3 +4,4 @@
 
 - How about importing the data from several Weather Stations into some spreadsheet software and drawing some graphs? Or maybe you'd like to try and use Python to draw some graphs for you?
 
+- Create a simple interface using the Python function `input` which asks for your longitude and latitude and finds the weather near you.

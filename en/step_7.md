@@ -8,8 +8,10 @@ As discussed earlier, we use longitude and latitude to work out the exact positi
 
 Without getting too technical, the haversine formula can provide the distance between two points on a sphere using longitudes and latitudes.
 
-- Open up a Python shell by clicking on `Menu` > `Programming` > `Python3 (IDLE)`.
-- Now click on `File` > `New File` to create a new Python script. Click on `File` > `Save As` and call your file `haversine.py`.
+- Create a new program by clicking on `File` > `New File` in the Python script. 
+
+- Click on `File` > `Save As` and call your file `haversine.py`.
+
 - To begin with, you're going to need a few functions from the `maths` library. Start off your file by importing the following:
 
     ``` python
@@ -47,13 +49,19 @@ Without getting too technical, the haversine formula can provide the distance be
         return distance
     ```
 
-- Save your file once again, and then you can test it. Run your file, and then in the shell you can type the following:
+The number `6371` in the code above is the radius of the Earth
+
+- Save your file and run your program to test it.
+
+- In the Python shell type the following:
 
     ``` python
     haversine(74.0059, 40.7128, 0.1278, 51.5074)
     ```
 
-- You should get an answer of 5570. This is the distance from London to New York. You can check the answer online if you like, although the values will be slightly different as the Earth is not an exact sphere. It's good enough for our purposes, though.
+![run the haversine function](images/run_haversine.PNG)
 
-Try a few more longitudes and latitudes from Google Maps.
+You should get an answer of 5570. This is the distance from London to New York. You can check the answer online if you like, although the values will be slightly different as the Earth is not an exact sphere. It's good enough for our purposes, though.
+
+- Try a few more longitudes and latitudes from Google Maps.
 

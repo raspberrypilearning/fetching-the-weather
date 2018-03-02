@@ -4,15 +4,20 @@ Now that you have a Weather Station to look at, you can learn how to fetch the l
 This is again handled using the RESTful API of the Weather Station database. This time, the URL you need is made up of two parts. The first tells the database that you're requesting the latest measurements:
 
 ``` html
-'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getlatestmeasurements/'
+https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getlatestmeasurements/
 ```
 You need to add the ID of the Weather Station you wish to access to the end of this. For example:
 
 ``` html
-'https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getlatestmeasurements/1648902'
+https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getlatestmeasurements/1648902
 ```
 
+- Enter the URL of the webstation you would like to see the data from into your web browser.
+
 - Create a new Python file again, by clicking on `File` > `New File`.
+
+- Save your program as `fetch_weather.py`.
+
 - Once again, you'll need the `requests` and `json` modules, as well as `pprint`:
 
     ``` python
@@ -34,7 +39,9 @@ You need to add the ID of the Weather Station you wish to access to the end of t
     pprint(weather)
     ```
 
-- You should see something like the following appearing in the shell:
+- Run your program
+
+You should see data from the weather station you picked appear in the shell:
 
     ``` json
     >>> [{'air_pressure': 1008.81,

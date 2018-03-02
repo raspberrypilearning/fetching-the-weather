@@ -1,13 +1,16 @@
 ## What you will need
 
-
+- A computer (PC/Mac/Linux/Raspberry Pi)
+- An internet connection
 
 ### Software
 
-#### Software installation
+- Python 3
+- [requests](http://docs.python-requests.org) Python module
 
-To install the software you need, run the following command in a terminal:
+[[[generic-python-install-python3]]]
 
-```bash
-sudo apt-get install python3-requests
-```
+You can use `pip` to install the `requests` module.
+
+[[[generic-python-installing-with-pip]]]
+
