@@ -8,11 +8,15 @@ duration: 2
 listed: true
 ingredient: false
 copyedit: true
-curriculum: creator, design-0, programming-3, phys-comp-0, manufacture-0, community-0
-interests: nature/outside/weather
+curriculum: 3, design-0, programming-3, phys-comp-0, manufacture-0, community-0
+interests: weather
 technologies: python
-site_areas: ''
-steps:
+site_areas: projects
+hardware: ''
+software: python
+version: 3
+last_tested: 2017-01-01
+steps: 
 - title: Introduction
 - title: What you will need
 - title: Fetching the Weather
@@ -24,4 +28,3 @@ steps:
 - title: Finding the closest station
 - title: Getting the weather data
 - title: What next?
-
