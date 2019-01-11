@@ -26,9 +26,9 @@ For this to work, you're going to need to run the longitude and latitude of all 
 
 You should see a large list of dictionaries, with each dictionary looking something like this:
 
-    ``` python
-    {'weather_stn_name': 'ACRG_ROOF', 'weather_stn_lat': 52.197834, 'weather_stn_id': 1648902, 'weather_stn_long': 0.125366}
-    ```
+``` python
+{'weather_stn_name': 'ACRG_ROOF', 'weather_stn_lat': 52.197834, 'weather_stn_id': 1648902, 'weather_stn_long': 0.125366}
+```
 
 The data we're interested in is the `'weather_stn_lat'` and `'weather_stn_long'`. These are the values we want to use in the haversine function.
 

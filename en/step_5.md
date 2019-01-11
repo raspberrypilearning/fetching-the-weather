@@ -43,24 +43,24 @@ https://apex.oracle.com/pls/apex/raspberrypi/weatherstation/getlatestmeasurement
 
 You should see data from the weather station you picked appear in the shell:
 
-    ``` json
-    >>> [{'air_pressure': 1008.81,
-      'air_quality': 74.9,
-      'ambient_temp': 23.58,
-      'created_by': 'ACRG_ROOF',
-      'created_on': '2016-11-16T12:00:01Z',
-      'ground_temp': 18.69,
-      'humidity': 33.41,
-      'id': 1669238,
-      'rainfall': 0,
-      'reading_timestamp': '2016-11-16T12:00:01Z',
-      'updated_by': 'ACRG_ROOF',
-      'updated_on': '2016-11-16T12:05:02.437Z',
-      'weather_stn_id': 1648902,
-      'wind_direction': 315,
-      'wind_gust_speed': 0,
-      'wind_speed': 0}]
-    ```
+``` json
+[{'air_pressure': 1008.81,
+'air_quality': 74.9,
+'ambient_temp': 23.58,
+'created_by': 'ACRG_ROOF',
+'created_on': '2016-11-16T12:00:01Z',
+'ground_temp': 18.69,
+'humidity': 33.41,
+'id': 1669238,
+'rainfall': 0,
+'reading_timestamp': '2016-11-16T12:00:01Z',
+'updated_by': 'ACRG_ROOF',
+'updated_on': '2016-11-16T12:05:02.437Z',
+'weather_stn_id': 1648902,
+'wind_direction': 315,
+'wind_gust_speed': 0,
+'wind_speed': 0}]
+```
 
 - If you don't see any data, it might be because the Weather Station is offline. Just try another Weather Station Id.
 
