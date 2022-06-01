@@ -16,15 +16,19 @@ hardware: ''
 software: python
 version: 3
 last_tested: 2017-01-01
-steps: 
+steps:
 - title: Introduction
 - title: What you will need
 - title: Fetching the Weather
 - title: Finding a Weather Station
+  completion:
+  - engaged
 - title: Fetching the latest weather
 - title: Longitude and latitude
 - title: Finding the distance between two points on the Earth
 - title: Fetch your local weather
 - title: Finding the closest station
 - title: Getting the weather data
+  completion:
+  - internal
 - title: What next?
