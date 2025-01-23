@@ -31,4 +31,6 @@ steps:
 - title: Getting the weather data
   completion:
   - internal
-- title: What next?
+- title: What can you do now?
+  completion:
+  - external
